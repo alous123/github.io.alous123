@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Scroll Effect</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease;
+        }
+        .scroll-section {
+            background: #f2f2f2;
+            text-align: center;
+        }
+        .scroll-section:nth-child(even) {
+            background: #ddd;
+        }
+        .scroll-section.show {
+            transform: translateY(0);
+        }
+        .scroll-section.hide {
+            transform: translateY(100%);
+        }
+    </style>
+</head>
+<body>
+
+<section class="scroll-section show">
+    <h1>مرحله ۱</h1>
+</section>
+<section class="scroll-section hide">
+    <h1>مرحله ۲</h1>
+</section>
+<section class="scroll-section hide">
+    <h1>مرحله ۳</h1>
+</section>
+
+<script>
+    document.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('.scroll-section');
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= window.innerHeight / 2) {
+                section.classList.add('show');
+                section.classList.remove('hide');
+            } else {
+                section.classList.add('hide');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
